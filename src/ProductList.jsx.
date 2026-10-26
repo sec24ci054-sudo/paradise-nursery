@@ -1,0 +1,105 @@
+
+import React from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "./CartSlice";
+import "./ProductList.css";
+
+const products = [
+  {
+    id: 1,
+    name: "Snake Plant",
+    price: 15,
+    category: "Indoor Plants",
+    image:
+      "https://images.unsplash.com/photo-1593482892290-f54927ae2b75?w=500",
+    description: "A low-maintenance plant for your home.",
+  },
+  {
+    id: 2,
+    name: "Monstera",
+    price: 25,
+    category: "Indoor Plants",
+    image:
+      "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500",
+    description: "A tropical plant with beautiful leaves.",
+  },
+  {
+    id: 3,
+    name: "Peace Lily",
+    price: 20,
+    category: "Flowering Plants",
+    image:
+      "https://images.unsplash.com/photo-1593691509543-c55fb32e5cee?w=500",
+    description: "An elegant plant for indoor spaces.",
+  },
+  {
+    id: 4,
+    name: "Succulent",
+    price: 10,
+    category: "Succulents",
+    image:
+      "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=500",
+    description: "A compact plant that needs little watering.",
+  },
+  {
+    id: 5,
+    name: "Rubber Plant",
+    price: 30,
+    category: "Indoor Plants",
+    image:
+      "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=500",
+    description: "A striking plant with glossy green leaves.",
+  },
+  {
+    id: 6,
+    name: "Aloe Vera",
+    price: 12,
+    category: "Succulents",
+    image:
+      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=500",
+    description: "A hardy succulent for a sunny spot.",
+  },
+];
+
+function ProductList() {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addItem(product));
+  };
+
+  return (
+    <main className="product-list">
+      <h1>Our Plants</h1>
+      <p>Discover your next favorite plant.</p>
+
+      <div className="product-grid">
+        {products.map((product) => (
+          <article className="product-card" key={product.id}>
+            <img
+              src={product.image}
+              alt={product.name}
+            />
+
+            <div className="product-info">
+              <h2>{product.name}</h2>
+              <p className="category">{product.category}</p>
+              <p>{product.description}</p>
+              <p className="price">
+                ${product.price.toFixed(2)}
+              </p>
+
+              <button
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+export default ProductList;
